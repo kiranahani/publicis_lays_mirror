@@ -1,0 +1,68 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face Swap App Test</title>
+  <style>
+    img {
+      width: 20%; 
+      height: auto; 
+    }
+
+    #buttonsticker, #buttoncaption {
+      display: none; /* Sembunyikan dari awal */
+    }
+  </style>
+</head>
+<body>
+  <h1>Face Swap App with Cloudinary</h1>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="sourceImage" accept="image/*" required>
+    <label for="gender">Choose Gender:</label>
+    <select id="gender" name="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+    <button type="button" onclick="uploadImages()">Upload and Swap Faces</button>
+  </form>
+  <div id="loadingStatus"></div>
+  <div id="result"></div>
+  <div>
+    <canvas id="resultCanvas" width="300" height="300"></canvas>
+  </div>
+  <button id="buttonNext1" style="display: none;" onclick="fetchAndPrintResultImage()">Next</button>
+  <div id="buttoncaption">
+    <button class="caption-btn" onclick="applyCaption('caption1.png')">Caption 1</button>
+    <button class="caption-btn" onclick="applyCaption('caption2.png')">Caption 2</button>
+    <button class="caption-btn" onclick="applyCaption('caption3.png')">Caption 3</button>
+    <button class="caption-btn" onclick="applyCaption('caption4.png')">Caption 4</button>
+    <button class="caption-btn" onclick="applyCaption('caption5.png')">Caption 5</button>
+    <button class="caption-btn" onclick="applyCaption('caption6.png')">Caption 6</button>
+    <button class="caption-btn" onclick="applyCaption('caption7.png')">Caption 7</button>
+    <button class="caption-btn" onclick="applyCaption('caption8.png')">Caption 8</button>
+    <div>
+      <button id="buttonNext2" onclick="nextAction()">Next</button>
+    </div>
+  </div>
+  <div id="buttonsticker">
+    <button class="sticker-btn" onclick="applySticker('Sticker1.png')">Sticker 1</button>
+    <button class="sticker-btn" onclick="applySticker('Sticker2.png')">Sticker 2</button>
+    <button class="sticker-btn" onclick="applySticker('Sticker3.png')">Sticker 3</button>
+    <button class="sticker-btn" onclick="applySticker('Sticker4.png')">Sticker 4</button>
+    <button class="sticker-btn" onclick="applySticker('Sticker5.png')">Sticker 5</button>
+    <button class="sticker-btn" onclick="applySticker('Sticker6.png')">Sticker 6</button>
+    <button class="sticker-btn" onclick="applySticker('Sticker7.png')">Sticker 7</button>
+    <button class="sticker-btn" onclick="applySticker('Sticker8.png')">Sticker 8</button>
+    <button class="sticker-btn" onclick="applySticker('Sticker9.png')">Sticker 9</button>
+    <button class="sticker-btn" onclick="applySticker('Sticker10.png')">Sticker 10</button>
+  </div>
+  <button id="buttonDownload" style="display: none;" onclick="downloadCanvas()">Download Image</button>
+  <div>
+    
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>
