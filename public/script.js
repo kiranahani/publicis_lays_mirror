@@ -185,6 +185,7 @@ function nextAction() {
     document.getElementById("buttoncaption").style.display = "none";
     document.getElementById("buttonsticker").style.display = "block";
     document.getElementById("buttonDownload").style.display = "block";
+    document.getElementById("buttonShare").style.display = "block";
 }
   
 function applySticker(stickerUrl) {
@@ -244,6 +245,34 @@ function downloadCanvas() {
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);
+}
+
+function shareCanvas() {
+    const canvas = document.getElementById("resultCanvas");
+    canvas.toBlob((result) => {
+
+        if (!result) {
+            console.error('Cannot create image blob')
+            return
+        }
+
+        if (!navigator.canShare ) {
+            console.error('The browser does not support sharing')
+            return
+        }
+        
+        const mime = result.type
+        const extension = mime.replace('image/', '')
+        const files = [ new File([result], `result.${extension}`, { type: mime }) ]
+
+        if (!navigator.canShare({files: files})) {
+            console.error('The browser does not support image sharing')
+            return
+        }
+
+        navigator.share({ files: files })
+
+    })
 }
   
 async function uploadRandomImage() {
