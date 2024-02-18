@@ -62,8 +62,12 @@ function renderPack(maxWidth, maxHeight) {
         newWidth = maxHeight * aspectRatio
     }
 
-    const yCoordinate = canvas.height - newHeight
-    context.drawImage(PackImage, 0, yCoordinate, newWidth, newHeight)
+    newWidth *= 0.85
+    newHeight *= 0.85
+
+    const xCoordinate = maxWidth / 2 - newWidth / 2
+    const yCoordinate = maxHeight - newHeight * 0.275 - newHeight / 2
+    context.drawImage(PackImage, xCoordinate, yCoordinate, newWidth, newHeight)
 }
 
 function renderCaption(maxWidth, maxHeight) {
@@ -92,12 +96,24 @@ function renderSticker(maxWidth, maxHeight) {
 
 }
 
-[FaceswapImage, PackImage, StickerImage, CaptionImage].forEach((image) => {
-    image.addEventListener('load', event => {
-        render()
-    })
-})
+function appendPackButton() {
+    const container = document.getElementById('button-pack-container')
 
+    if (!Array.isArray(packFiles) || !packName) {
+        console.error('No pack selected')
+        return
+    }
+
+    packFiles.forEach((file, index) => {
+        const button = document.createElement('button')
+        button.innerHTML = `Pack ${index + 1}`
+        button.addEventListener('click', event => {
+            applyPack(`${packName}/${file}`)
+        })
+        button.className = 'pack-btn'
+        container.appendChild(button)
+    })
+}
 
 async function uploadImages() {
 
@@ -254,5 +270,15 @@ function downloadImage(imageUrl) {
         .catch((error) => {
             console.error("Error downloading image:", error);
         });
-  }
+}
+
+document.addEventListener('DOMContentLoaded', event => {
+    [FaceswapImage, PackImage, StickerImage, CaptionImage].forEach((image) => {
+        image.addEventListener('load', event => {
+            render()
+        })
+    })
+
+    appendPackButton()
+})
   
