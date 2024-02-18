@@ -15,6 +15,10 @@
       display: none; /* Sembunyikan dari awal */
     }
   </style>
+  <script>
+    const packName = '{{packName}}'
+    const packFiles = JSON.parse('{{packImages}}')
+  </script>
 </head>
 <body>
   <h1>Face Swap App with Cloudinary</h1>
@@ -34,14 +38,7 @@
     <canvas id="resultCanvas" width="300" height="300"></canvas>
   </div>
   <div id="buttonpack" style="display: none;">
-    <button class="pack-btn" onclick="applyPack('Extra-BBQ/Pack1.png')">Pack 1</button>
-    <button class="pack-btn" onclick="applyPack('Hot-Chilli-Squid/Pack1.png')">Pack 2</button>
-    <button class="pack-btn" onclick="applyPack('MK/Pack1.png')">Pack 3</button>
-    <button class="pack-btn" onclick="applyPack('Nori-Seaweed/Pack1.png')">Pack 4</button>
-    <button class="pack-btn" onclick="applyPack('Original/Pack1.png')">Pack 5</button>
-    <button class="pack-btn" onclick="applyPack('Original-Rock/Pack1.png')">Pack 6</button>
-    <button class="pack-btn" onclick="applyPack('Prawn-Seafood/Pack1.png')">Pack 7</button>
-    <button class="pack-btn" onclick="applyPack('Sour-Cream/Pack1.png')">Pack 8</button>
+    <div id="button-pack-container"></div>
     <div>
       <button id="buttonNext1" onclick="navigateToCaption()">Next</button>
     </div>

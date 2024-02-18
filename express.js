@@ -184,8 +184,14 @@ app.get('/pack/:packName', async (req, res) => {
         // Replace a placeholder in the HTML with the actual packName
         data = data.replace('{{packName}}', packName);
 
-        // Send the modified HTML as the response
-        res.send(data);
+        const packPath = path.join(__dirname, 'public', 'img', 'pack', packName)
+        const packFiles     = await fs.readdir(packPath)
+        const packImages    = packFiles.filter(packFile => typeof packFile == 'string' && packFile.endsWith('.png'))
+
+        data = data.replace('{{packImages}}', JSON.stringify(packImages))
+
+        res.send(data)
+
     } catch (error) {
         console.error('Error processing pack:', error);
         res.status(500).send('Internal server error');
